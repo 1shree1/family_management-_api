@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface FamilyService {
 
-    FamilyResponse saveFamily(FamilyRequest familyRequest) throws UserNotFoundException;
+    List<FamilyResponse> saveFamily(List<FamilyRequest> familyRequest);
     FamilyResponse getFamilyById(Long familyId);
     List<FamilyResponse> getAllFamilyByUserId(Long userId);
     FamilyResponse updateFamilyById(Long familyId, FamilyUpdateRequest familyUpdateRequest);

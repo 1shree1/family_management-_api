@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Data
 @Entity
@@ -13,11 +12,15 @@ import java.util.List;
 @NoArgsConstructor
 public class Users {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String name;
     private String phoneNo;
     private String Address;
     private int age;
     private String gender;
+    private String password;
+
+    @Column(unique = true)
+    private String email;
 }

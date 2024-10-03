@@ -8,7 +8,4 @@ public class FamilyManagementApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FamilyManagementApplication.class, args);
 	}
-
-
-
 }

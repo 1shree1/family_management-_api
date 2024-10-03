@@ -20,7 +20,7 @@ import java.util.List;
 public class FamilyController {
     private final FamilyService familyService;
     @PostMapping("/add")
-    public ResponseEntity<FamilyResponse> addFamily(@RequestBody FamilyRequest familyRequest) throws UserNotFoundException {
+    public ResponseEntity<List<FamilyResponse>> addFamily(@RequestBody List<FamilyRequest> familyRequest) {
         return ResponseEntity.ok(familyService.saveFamily(familyRequest));
     }
 

@@ -25,23 +25,28 @@ public class FamilyServiceImpl implements FamilyService {
     private final UsersRepository usersRepository;
 
     @Override
-    public FamilyResponse saveFamily(FamilyRequest familyRequest) throws UserNotFoundException {
-        log.info("Saving family details: {}", familyRequest);
-        Family family = new Family();
-        family.setName(familyRequest.getName());
-        family.setAddress(familyRequest.getAddress());
-        family.setRelation(familyRequest.getRelation());
-        family.setAge(familyRequest.getAge());
-        family.setPhoneNumber(familyRequest.getPhoneNumber());
-        family.setGender(familyRequest.getGender());
+    public List<FamilyResponse> saveFamily(List<FamilyRequest> familyRequest) {
+        List<FamilyResponse> familyResponseList = new ArrayList<>();
+        for (FamilyRequest request : familyRequest) {
 
-        Users users = usersRepository.findById(familyRequest.getUserId()).orElseThrow(
-                ()-> new UserNotFoundException("User Not Found!")
-        );
-        family.setUsers(users);
-        Family savedFamily = familyRepository.save(family);
-        log.info("Family Saved: {}", family);
-        return new FamilyResponse(savedFamily);
+
+            Family family = new Family();
+            family.setName(request.getName());
+            family.setAddress(request.getAddress());
+            family.setRelation(request.getRelation());
+            family.setAge(request.getAge());
+            family.setPhoneNumber(request.getPhoneNumber());
+            family.setGender(request.getGender());
+            Users users = usersRepository.findById(request.getUserId()).orElseThrow(
+                    () -> new EntityNotFoundException("User Not Found!")
+            );
+            family.setUsers(users);
+            Family savedFamily = familyRepository.save(family);
+            FamilyResponse familyResponse = new FamilyResponse(savedFamily);
+            familyResponseList.add(familyResponse);
+        }
+
+        return familyResponseList;
     }
 
     @Override
